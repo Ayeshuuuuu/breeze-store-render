@@ -1,0 +1,152 @@
+/* ================= Variables ================= */
+:root {
+    --primary: #4CAF50;
+    --primary-hover: #45a049;
+    --danger: #f44336;
+    --danger-hover: #e53935;
+    --info: #2196F3;
+    --warning: #FF9800;
+    --success: #4CAF50;
+    --shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* ================= Common Card & Button Styles ================= */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+button, .delete-btn, .delete-section {
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 8px 14px;
+    color: white;
+    font-size: 0.9em;
+    text-decoration: none;
+    display: inline-block;
+    background: var(--primary);
+    transition: background 0.2s;
+}
+button:hover, .delete-section:hover { background: var(--primary-hover); }
+.delete-btn { background: var(--danger); }
+.delete-btn:hover { background: var(--danger-hover); }
+
+/* ================= Flash Messages ================= */
+.flash {
+    padding: 10px;
+    border-radius: 6px;
+    margin: 5px 0;
+    color: white;
+    text-align: center;
+}
+.flash.success { background: var(--success); }
+.flash.info { background: var(--info); }
+.flash.warning { background: var(--warning); }
+.flash.error { background: var(--danger); }
+
+/* ================= Grid Layouts ================= */
+.section-grid, .item-grid, .admin-item-grid {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+.section-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.item-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.admin-item-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+
+/* ================= Section Cards ================= */
+.section-card {
+    min-height: 320px;
+    justify-content: flex-start;
+    padding: 0;
+}
+.section-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px 12px 0 0;
+    border-bottom: 2px solid #eee;
+}
+.section-card h2 { margin: 12px 0 4px; font-size: 1.2em; font-weight: bold; }
+.section-card p { margin: 0 0 10px; color: #555; font-size: 1em; }
+
+/* ================= Fullscreen Image & Modal ================= */
+.fullscreen-image, .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.fullscreen-image:target, .modal:target { display: flex; }
+.fullscreen-image img, .modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+.fullscreen-image .close, .modal .close {
+    position: absolute;
+    top: 20px; right: 30px;
+    font-size: 3em;
+    color: white;
+    text-decoration: none;
+    background: rgba(0,0,0,0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* ================= Header ================= */
+.site-header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+.logo-container { display: flex; align-items: center; gap: 15px; justify-content: center; }
+.logo { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #ccc; object-fit: cover; }
+.site-header h1 { font-size: 28px; color: #333; margin: 0; font-weight: bold; }
+body { padding-top: 120px; }
+
+/* ================= Forms ================= */
+.admin-form, .admin-content form {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.admin-form input, .admin-form select, 
+.admin-content input, .admin-content select {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* ================= Mobile ================= */
+@media (max-width: 600px) {
+    .logo { width: 60px; height: 60px; }
+    .site-header h1 { font-size: 20px; }
+    .section-card img { height: 160px; }
+    .admin-item-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+}

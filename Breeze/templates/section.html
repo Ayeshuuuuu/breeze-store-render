@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ section_name|capitalize() }} - Breeze - Naseem</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% include 'header.html' %}
+  <div class="section-content">
+    <h1>{{ section_name|capitalize() }}</h1>
+    <div class="item-grid">
+      {% if items %}
+        {% for item in items %}
+          <div class="item-card">
+            {% if item.image %}
+              <!-- Thumbnail that opens fullscreen image -->
+              <div class="square-image-container">
+                <a href="#img{{ loop.index }}">
+                  <img src="{{ url_for('static', filename='uploads/' ~ item.image) }}" alt="{{ item.fabricname }}">
+                </a>
+              </div>
+            {% endif %}
+            <!-- Item details below the image -->
+            <p><strong>Fabric:</strong> {{ item.fabricname }}</p>
+            <p><strong>Color:</strong> {{ item.color }}</p>
+            <p><strong>Size:</strong> {{ item.size }}</p>
+            <p><strong>Price:</strong> ₹{{ item.price }}</p>
+          </div>
+          <!-- Fullscreen Image Overlay (uses fullscreen-image class from your CSS) -->
+          <div id="img{{ loop.index }}" class="fullscreen-image">
+            <a href="#" class="close">&times;</a>
+            <img src="{{ url_for('static', filename='uploads/' ~ item.image) }}" alt="{{ item.fabricname }}">
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No items available in this section.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html> 
