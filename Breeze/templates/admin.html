@@ -1,29 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <!-- Link external CSS file -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_login.css') }}">
-</head>
-<body>
-    <body class="login">
-    <div class="login-container">
-        <h2>Admin Login</h2>
-        <form method="POST" action="/admin_login">
-            <input type="password" name="password" placeholder="Enter Admin Password" required>
-            {% if error %}
-            <p class="error">{{ error }}</p>
-            {% endif %}
-            <input type="submit" value="Login">
-        </form>
-    </div>
-</body>
-</html>    this admin_login .html
-
-<!DOCTYPE html>
-<html lang="en">
 <head> 
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -35,19 +11,22 @@
     <div class="admin-content"> 
         <h1>Admin Panel - Breeze - Naseem</h1>
         <!-- Add Section Form -->
-<form method="POST" action="{{ url_for('add_section') }}" style="margin-bottom: 2em;">
-    <input type="text" name="new_section" placeholder="New Section Name" required>
-    <button type="submit">Add Section</button>
-</form>
-        <form action="/admin" method="POST" enctype="multipart/form-data">
+        <form method="POST" action="{{ url_for('add_section') }}" style="margin-bottom: 2em;">
+            <input type="text" name="new_section" placeholder="New Section Name" required>
+            <button type="submit">Add Section</button>
+        </form>
+        
+        <form action="{{ url_for('admin') }}" method="POST" enctype="multipart/form-data">
             <label>Section:</label> 
             <select name="section" required> 
-                 {% for section in items.keys() %}
-        <option value="{{ section }}">{{ section|capitalize }}</option>
-    {% endfor %}
+                {% for section in items.keys() %}
+                    <option value="{{ section }}">{{ section|capitalize }}</option>
+                {% endfor %}
             </select><br><br>
+            
             <label>Upload Cover Image (optional):</label>
             <input type="file" name="cover" accept="image/*"><br><br> 
+            
             <h3>Add Item Details</h3> 
             <div id="item-fields">
                 <div>
@@ -61,14 +40,18 @@
             <br><br> 
             <button type="submit">Add Items</button> 
         </form> 
+        
         <hr> 
         <h2>Uploaded Items</h2> 
+        
         {% for section, items_list in items.items() %} 
             <h3>{{ section|capitalize() }}</h3> 
+            
             <!-- Delete Section Button -->
-<form method="POST" action="{{ url_for('delete_section', section=section) }}" style="display:inline;">
-    <button type="submit" onclick="return confirm('Delete section {{ section|capitalize() }}?')">Delete Section</button>
-</form>
+            <form method="POST" action="{{ url_for('delete_section', section=section) }}" style="display:inline;">
+                <button type="submit" onclick="return confirm('Delete section {{ section|capitalize() }}?')">Delete Section</button>
+            </form>
+            
             <div class="admin-item-grid">
                 {% if items_list["items"] %}
                     {% for item in items_list["items"] %} 
@@ -98,4 +81,4 @@
         {% endfor %}
     </div>
 </body>
-</html>  
+</html>
