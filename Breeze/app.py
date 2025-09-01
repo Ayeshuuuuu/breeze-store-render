@@ -5,7 +5,7 @@ from datetime import datetime
 
 # ------------------ Flask App Configuration ------------------
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Change this to a random string
+app.secret_key = 'Naseem breeze store 1234'  # Change this to a random string
 
 # Use environment variable for admin password
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'Naseem0811')
@@ -78,7 +78,12 @@ def section_page(section_name):
 @app.route('/admin_login', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
-        if request.form.get('password') == ADMIN_PASSWORD:
+        password_attempt = request.form.get('password')
+        # Add debug print (remove in production)
+        print(f"Password attempt: {password_attempt}")
+        print(f"Expected password: {ADMIN_PASSWORD}")
+        
+        if password_attempt == ADMIN_PASSWORD:
             session['admin_logged_in'] = True
             return redirect(url_for('admin'))
         return render_template('admin_login.html', error='Invalid password')
@@ -154,3 +159,4 @@ def delete_item(section, index):
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+
